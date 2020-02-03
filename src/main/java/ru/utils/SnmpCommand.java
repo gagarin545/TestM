@@ -63,7 +63,6 @@ public abstract class SnmpCommand
         return target;
     }
     protected static int Nport(String p, String sl, String l){
-        System.out.println("|" + sl + "|" + p + "|");
         if(sl == null)  return 0;
         int i = Integer.parseInt(sl);
         if ( i < 32 )

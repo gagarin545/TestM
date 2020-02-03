@@ -105,7 +105,6 @@ public class ViewTest {
         setSlot(s.get(0));
         setPort(s.get(1));
         setOnt(s.get(2));
-        System.out.println("size =" + s.size());
         if( s.size() > 3)
             setVlans(s.stream().skip(3).reduce( (a,b) -> a + ' ' + b).get());
     }

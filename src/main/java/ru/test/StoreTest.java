@@ -21,6 +21,7 @@ public class StoreTest extends SnmpCommand implements TestInterface {
         ViewTest viewTest = new ViewTest();
         String s = incident.getTechdata();
         //System.out.println(s);
+        System.out.println( incident.getService());
 
         if (s.contains("[") && !s.contains("[КСА")) {
             if ((s.substring(s.lastIndexOf("[") + 1, s.lastIndexOf("]")).length() < 15)) {
