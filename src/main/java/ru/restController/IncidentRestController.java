@@ -6,7 +6,6 @@ import ru.entity.IncidentEntity;
 import ru.entity.ViewTest;
 import ru.service.IncidentService;
 import ru.test.StoreTest;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +33,8 @@ public class IncidentRestController {
     @GetMapping(value="/{iddivision}", produces = "application/json")
     public List<IncidentEntity> getIncidentList(@PathVariable int[] iddivision) {
         List<IncidentEntity> incidentEntity = incidentService.incidentlist(iddivision);
-        System.out.println("Rest:выбрано->" + incidentEntity.size());
+     //   System.out.println("Rest:выбрано->" + incidentEntity.size());
+     //   incidentEntity.forEach( x-> System.out.println(x.getService()));
         Arrays.stream( iddivision).forEach(x-> System.out.print(x + ' '));
         return incidentEntity;
     }

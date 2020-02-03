@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 public class StoreTest extends SnmpCommand implements TestInterface {
     private IncidentEntity incident;
-    private String url_get_page = "http://10.183.116.238/cgi-bin/getTechData.php?svc=";
 
     public StoreTest(IncidentEntity incident) {
         this.incident = incident;
@@ -21,7 +20,7 @@ public class StoreTest extends SnmpCommand implements TestInterface {
     public ViewTest test() throws IOException {
         ViewTest viewTest = new ViewTest();
         String s = incident.getTechdata();
-        //System.out.println(s);
+        System.out.println(s);
 
         if(s.contains("[") && !s.contains("[КСА")) {
             if((s.substring(s.lastIndexOf("[") + 1, s.lastIndexOf("]")).length() < 15)) {
@@ -81,6 +80,7 @@ public class StoreTest extends SnmpCommand implements TestInterface {
                     break;
                 case 3: // PON
                     try {
+                        String url_get_page = "http://10.183.116.238/cgi-bin/getTechData.php?svc=";
                         viewTest.setSlotPortOnt(Arrays.stream((new GetResultPage(url_get_page + incident.getService()).getResultTest().readLine()).split(";"))
                                 .skip(4)
                                 .collect(Collectors.toList()));
