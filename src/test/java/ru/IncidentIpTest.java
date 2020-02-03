@@ -30,6 +30,7 @@ public class IncidentIpTest extends SnmpCommand implements TestInterface {
         String url_get_page = "http://10.183.116.238/cgi-bin/getTechData.php?svc=";
         List<IncidentEntity> incidentEntities =  incidentService.incidentlist( id);
         final int[] i = {0};
+        ViewTest viewTest = new ViewTest();
 
         incidentEntities.forEach( incident-> {
             String s = incident.getTechdata();
@@ -66,16 +67,16 @@ public class IncidentIpTest extends SnmpCommand implements TestInterface {
                                            System.out.println("!! >"  + getAsString(new OID(SMI + "1286.1.3.3.1.1.2.131072")));
                                            switch (getAsString(new OID(SMI + "1286.1.3.3.1.1.2.131072"))) {
                                                case "IPNI_APP_2.52.35":
-                                                   new TestCuFocus().test();   // комманды
+                                                   new TestCuFocus(viewTest).test();   // комманды
                                                    break;
                                                case "mini_ge_9.01.48":
-                                                   new TestCuFocus2().test();
+                                                   new TestCuFocus2(viewTest).test();
                                                    break;
                                                case "IPNI_HB_APP_2.00.73":
                                                case "se_10.01.64":
                                                case "se_10.01.65":
                                                    //new TestCuFocus(String.valueOf(Binary.Nport(viewTest.getPort(),viewTest.getSlot(), "00")), String.valueOf(Binary.Nport(viewTest.getPort(),viewTest.getSlot(),  "01"))).test();  // комманды
-                                                   new TestCuFocus().test();  // комманды
+                                                   new TestCuFocus(viewTest).test();  // комманды
                                                    break;
                                                default:
                                                    System.out.println(getAsString(new OID(SMI + "1286.1.3.3.1.1.2.131072")));
@@ -103,10 +104,10 @@ public class IncidentIpTest extends SnmpCommand implements TestInterface {
                                System.out.println(getAsString(new OID(".1.3.6.1.2.1.1.1.0")));
                                switch (getAsString(new OID(".1.3.6.1.2.1.1.1.0"))) {
                                    case "ECI telecom HiFOCuS broadband access system":
-                                       new TestEciOptic(String.valueOf(incident.getService())).test();
+                                       new TestEciOptic(viewTest, String.valueOf(incident.getService())).test();
                                        break;
                                    case "Huawei Integrated Access Software":
-                                       new TestOpticHuawei().test();
+                                       new TestOpticHuawei(viewTest).test();
                                          //status = testing.test(String.valueOf(4194304000L + 8192 * Integer.parseInt(viewTest.getPort()) + 256 * Integer.parseInt(viewTest.getSlot()) ), viewTest.getSlot(), viewTest.getOnt(), 3);  // комманды;
                                        break;
                                }
@@ -117,7 +118,7 @@ public class IncidentIpTest extends SnmpCommand implements TestInterface {
                        case 5: // FTTx
                            viewTest.setPort(Arrays.stream(s.substring( s.lastIndexOf("]") + 1).replace("-", "").trim().split(" ")).findFirst().get());
                            try {
-                               new TestEthernetSwitch().test();
+                               new TestEthernetSwitch(viewTest).test();
                            } catch (IOException e) {
                                e.printStackTrace();
                            }

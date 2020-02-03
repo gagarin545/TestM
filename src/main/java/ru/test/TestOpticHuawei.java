@@ -7,17 +7,18 @@ import ru.utils.SnmpCommand;
 import java.io.IOException;
 
 public class TestOpticHuawei extends SnmpCommand implements TestInterface {
-    private String ifindex, chindex, ont;
+    private ViewTest viewTest;
 
-    public TestOpticHuawei() {
-        this.ifindex = String.valueOf(4194304000L + 8192 * Integer.parseInt(viewTest.getSlot()) + 256 * Integer.parseInt(viewTest.getPort()));
-        this.chindex = viewTest.getPort();
-        this.ont = viewTest.getOnt();
-        setAddress("udp:" + viewTest.getIp_address() + "/161");
+    public TestOpticHuawei(ViewTest viewTest) {
+        this.viewTest = viewTest;
     }
 
     @Override
     public ViewTest test() throws IOException {
+        String ifindex = String.valueOf(4194304000L + 8192 * Integer.parseInt(viewTest.getSlot()) + 256 * Integer.parseInt(viewTest.getPort()));
+        String chindex = viewTest.getPort();
+        String ont =  viewTest.getOnt();
+        setAddress("udp:" + viewTest.getIp_address() + "/161");
         viewTest.setStatus(getAsString(new OID(SMI + "2011.6.128.1.1.2.46.1.15." + ifindex + '.' + ont)));
         viewTest.setDescription(getAsString(new OID(SMI + "2011.6.128.1.1.2.43.1.9." + ifindex + '.' + ont)));     //  описание
         viewTest.setSn(getAsString(new OID(SMI + "2011.6.128.1.1.2.43.1.3." + ifindex + '.' + ont)));           //  sn

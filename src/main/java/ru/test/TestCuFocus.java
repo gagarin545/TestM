@@ -8,15 +8,16 @@ import java.io.IOException;
 
 
 public class TestCuFocus extends SnmpCommand implements TestInterface {
-    private String ifindex  , chindex ;
-    public TestCuFocus() {
-        this.ifindex = String.valueOf(Nport(viewTest.getSlot(), viewTest.getPort(), "00"));
-        this.chindex = String.valueOf(Nport(viewTest.getSlot(),viewTest.getPort(),  "01"));
-        setAddress("udp:" + viewTest.getIp_address() + "/161");
+    private ViewTest viewTest;
+    public TestCuFocus(ViewTest viewTest) {
+        this.viewTest = viewTest;
     }
 
     @Override
     public ViewTest test() throws IOException {
+        String ifindex = String.valueOf(Nport(viewTest.getSlot(), viewTest.getPort(), "00"));
+        String chindex = String.valueOf(Nport(viewTest.getSlot(),viewTest.getPort(),  "01"));
+        setAddress("udp:" + viewTest.getIp_address() + "/161");
         viewTest.setStatus(getAsString(new OID(SMI + "1286.1.3.9.2.1.1.1.7." + ifindex))); //состояние линии
         viewTest.setProfil(getAsString(new OID(SMI + "1286.1.3.9.1.5.1.1.1.2." + ifindex))); //тек. профиль
         viewTest.setInit_count(getAsString(new OID(SMI + "1286.1.3.9.1.4.1.2.1.6." + ifindex))); // инициализации

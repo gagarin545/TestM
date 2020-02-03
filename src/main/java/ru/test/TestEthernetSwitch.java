@@ -6,15 +6,16 @@ import ru.utils.SnmpCommand;
 import java.io.IOException;
 
 public class TestEthernetSwitch extends SnmpCommand implements TestInterface {
-    private String ont;
+    private ViewTest viewTest;
 
-    public TestEthernetSwitch() {
-        this.ont = viewTest.getOnt();
-        setAddress("udp:" + viewTest.getIp_address() + "/161");
+    public TestEthernetSwitch(ViewTest viewTest) {
+        this.viewTest = viewTest;
     }
 
     @Override
     public ViewTest test() throws IOException {
+        String ont = viewTest.getOnt();
+        setAddress("udp:" + viewTest.getIp_address() + "/161");
         viewTest.setStatus(getAsString(new OID("1.3.6.1.2.1.2.2.1.7." + ont))); //Состояние
         viewTest.setDescription(getAsString(new OID("1.3.6.1.2.1.2.2.1.8." + ont))); // Адм состояние
         viewTest.setSn(getAsString(new OID("1.3.6.1.2.1.16.1.1.1.5." + ont)));   // Пакетов

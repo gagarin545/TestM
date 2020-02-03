@@ -6,8 +6,10 @@ import java.io.IOException;
 
 public class TestEciOptic implements TestInterface {
     private String service;
+    private ViewTest viewTest;
 
-    public TestEciOptic(String service) {
+    public TestEciOptic(ViewTest viewTest, String service) {
+        this.viewTest = viewTest;
         this.service = service;
     }
 
