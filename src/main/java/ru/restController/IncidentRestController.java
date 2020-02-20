@@ -19,9 +19,6 @@ public class IncidentRestController {
 
     @GetMapping(value="/test/{nincident}", produces = "application/json")
     public ViewTest getIncident(@PathVariable long nincident) {
-        //IncidentEntity incident = incidentService.incident(nincident);
-        //System.out.println("Techdata:выбрано->" + incident.getTechdata());
-        //StoreTest storeTest = new StoreTest(incidentService.incident(nincident));
         try {
             return new StoreTest(incidentService.incident(nincident)).test();
         } catch (IOException e) {
@@ -33,8 +30,6 @@ public class IncidentRestController {
     @GetMapping(value="/{iddivision}", produces = "application/json")
     public List<IncidentEntity> getIncidentList(@PathVariable int[] iddivision) {
         List<IncidentEntity> incidentEntity = incidentService.incidentlist(iddivision);
-     //   System.out.println("Rest:выбрано->" + incidentEntity.size());
-     //   incidentEntity.forEach( x-> System.out.println(x.getService()));
         System.out.print("Отдел ->");
         Arrays.stream( iddivision).forEach(x-> System.out.print(String.valueOf(x) + ' '));
         return incidentEntity;

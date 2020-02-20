@@ -30,11 +30,16 @@ public class WorkerRestController {
     }
     @PostMapping(value="/add")
     public WorkersEntity postDevision(@RequestParam Map<String, String> map) {
+        WorkersEntity workersEntity;
         System.out.println("len=" + map.get("name") + "|" + map.get("imei") + map.get("iddivision"));
-        WorkersEntity workersEntity = workService.workername( map.get("name"));
+
+        workersEntity = workService.worker( map.get("imei"));
         if( workersEntity == null) {
-            workersEntity = new WorkersEntity();
-            workersEntity.setName(map.get("name"));
+            workersEntity = workService.workername(map.get("name"));
+            if (workersEntity == null) {
+                workersEntity = new WorkersEntity();
+                workersEntity.setName(map.get("name"));
+            }
         }
         workersEntity.setImei(map.get("imei"));
         workersEntity.setIddivision(Arrays.stream(map.get("iddivision").replace("[", "").replace("]", "").split(", ")).mapToInt(Integer::parseInt).toArray());

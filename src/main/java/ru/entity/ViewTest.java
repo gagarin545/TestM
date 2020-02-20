@@ -1,5 +1,7 @@
 package ru.entity;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -28,20 +30,35 @@ public class ViewTest {
     private float v_current_in;
     private float v_max_out;
     private float v_max_in;
+    @Getter
     private String description;
+    @Getter
     private String sn;
+    @Getter
     private String passwd;
+    @Getter
     private String ontVersion;
+    @Getter
     private String distance;
+    @Getter
     private String status_port1 = "0";
+    @Getter
     private String status_port2 = "0";
+    @Getter
     private String status_port3 = "0";
+    @Getter
     private String status_port4 = "0";
-    private String V_port1;
-    private String V_port2;
-    private String V_port3;
-    private String V_port4;
+    @Getter
+    private String v_port1;
+    @Getter
+    private String v_port2;
+    @Getter
+    private String v_port3;
+    @Getter
+    private String v_port4;
+    @Getter
     private String macAddress;
+    @Getter
     private String vlans;
 
     public ViewTest() {}
@@ -92,21 +109,18 @@ public class ViewTest {
     public void setV_max_out(float v_max_out) {        this.v_max_out = v_max_out;    }
     public float getV_max_in() {        return v_max_in;    }
     public void setV_max_in(float v_max_in) {        this.v_max_in = v_max_in;    }
-    public String getDescription() {        return description;    }
-    public void setDescription(String description) {        this.description = description;    }
-    public String getSn() {        return sn;    }
-    public void setSn(String sn) {        this.sn = sn;    }
-    public String getPasswd() {        return passwd;    }
     public void setSlotPort(List<String> s) {
-        setSlot(s.get(0));
-        setPort(s.get(1));
+        setSlot(s.get(1));
+        setPort(s.get(0));
     }
     public void setSlotPortOnt(List<String> s) {
-        setSlot(s.get(0));
-        setPort(s.get(1));
-        setOnt(s.get(2));
-        if( s.size() > 3)
-            setVlans(s.stream().skip(3).reduce( (a,b) -> a + ' ' + b).get());
+        if(s.size() > 0) {
+            setSlot(s.get(4));
+            setPort(s.get(5));
+            setOnt(s.get(6));
+            if (s.size() > 6)
+                setVlans(s.stream().skip(7).reduce((a, b) -> a + ' ' + b).get());
+        }
     }
     public void setPasswd(String passwd) {
         if( passwd.contains("ff"))
@@ -114,27 +128,18 @@ public class ViewTest {
         else
             this.passwd = Arrays.stream(passwd.split(":")).map(w-> (char) (Integer.valueOf(w) + 18)).filter(x-> x >= '0' && x <= '9').map(x-> Character.toString(x)).reduce(String::concat).get();
     }
-    public String getOntVersion() {        return ontVersion;    }
+    public void setDescription(String description) {        this.description = description;    }
+    public void setSn(String sn) {        this.sn = sn;    }
     public void setOntVersion(String ontVersion) {        this.ontVersion = ontVersion;    }
-    public String getDistance() {        return distance;    }
     public void setDistance(String distance) {        this.distance = distance;    }
-    public String getStatus_port1() {        return status_port1;    }
     public void setStatus_port1(String status_port1) {        this.status_port1 = status_port1;    }
-    public String getStatus_port2() {        return status_port2;    }
     public void setStatus_port2(String status_port2) {        this.status_port2 = status_port2;    }
-    public String getStatus_port3() {        return status_port3;    }
     public void setStatus_port3(String status_port3) {        this.status_port3 = status_port3;    }
-    public String getStatus_port4() {        return status_port4;    }
     public void setStatus_port4(String status_port4) {        this.status_port4 = status_port4;    }
-    public String getV_port1() {        return V_port1;    }
-    public void setV_port1(String v_port1) {        V_port1 = v_port1;    }
-    public String getV_port2() {        return V_port2;    }
-    public void setV_port2(String v_port2) {        V_port2 = v_port2;    }
-    public String getV_port3() {        return V_port3;    }
-    public void setV_port3(String v_port3) {        V_port3 = v_port3;    }
-    public String getV_port4() {        return V_port4;    }
-    public void setV_port4(String v_port4) {        V_port4 = v_port4;    }
-    public String getMacAddress() {        return macAddress;    }
+    public void setV_port1(String v_port1) {    this.v_port1 = v_port1;    }
+    public void setV_port2(String v_port2) {    this.v_port2 = v_port2;    }
+    public void setV_port3(String v_port3) {    this.v_port3 = v_port3;    }
+    public void setV_port4(String v_port4) {    this.v_port4 = v_port4;    }
     public void setMacAddress(String macAddress) {        this.macAddress = macAddress;    }
 
     @Override
@@ -171,10 +176,10 @@ public class ViewTest {
                 ", status_port2='" + status_port2 + '\'' +
                 ", status_port3='" + status_port3 + '\'' +
                 ", status_port4='" + status_port4 + '\'' +
-                ", V_port1='" + V_port1 + '\'' +
-                ", V_port2='" + V_port2 + '\'' +
-                ", V_port3='" + V_port3 + '\'' +
-                ", V_port4='" + V_port4 + '\'' +
+                ", v_port1='" + v_port1 + '\'' +
+                ", v_port2='" + v_port2 + '\'' +
+                ", v_port3='" + v_port3 + '\'' +
+                ", v_port4='" + v_port4 + '\'' +
                 ", macAddress='" + macAddress + '\'' +
                 ", vlans='" + vlans + '\'' +
                 '}';

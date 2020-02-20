@@ -10,7 +10,6 @@ import ru.entity.ViewTest;
 import ru.service.IncidentService;
 import ru.test.*;
 import ru.utils.SnmpCommand;
-
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Arrays;
@@ -19,13 +18,12 @@ import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class IncidentIpTest extends SnmpCommand implements TestInterface {
+public class IncidentIpTest extends SnmpCommand {
     @Resource
     private IncidentService incidentService;
 
     @Test
-    @Override
-    public ViewTest test() throws IOException {
+    public void test() throws IOException {
         int[] id = {4};
         String url_get_page = "http://10.183.116.238/cgi-bin/getTechData.php?svc=";
         List<IncidentEntity> incidentEntities =  incidentService.incidentlist( id);
@@ -116,6 +114,7 @@ public class IncidentIpTest extends SnmpCommand implements TestInterface {
                            }
                            break;
                        case 5: // FTTx
+                           System.out.println(incident.getTechnogyEntity().getMameTechnology() + "|" + incident.getTechdata());
                            viewTest.setPort(Arrays.stream(s.substring( s.lastIndexOf("]") + 1).replace("-", "").trim().split(" ")).findFirst().get());
                            try {
                                new TestEthernetSwitch(viewTest).test();
@@ -130,7 +129,7 @@ public class IncidentIpTest extends SnmpCommand implements TestInterface {
         });
 
         System.out.println("size=" + incidentEntities.size() + "|" + i[0]);
-        return viewTest;
+
     }
     static Boolean isNumber(String s) {
         try{            Integer.parseInt(s.trim());        } catch (NumberFormatException e) {            return false;        }

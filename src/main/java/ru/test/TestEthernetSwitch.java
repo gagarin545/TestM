@@ -14,7 +14,7 @@ public class TestEthernetSwitch extends SnmpCommand implements TestInterface {
 
     @Override
     public ViewTest test() throws IOException {
-        String ont = viewTest.getOnt();
+        String ont = viewTest.getPort();
         setAddress("udp:" + viewTest.getIp_address() + "/161");
         viewTest.setStatus(getAsString(new OID("1.3.6.1.2.1.2.2.1.7." + ont))); //Состояние
         viewTest.setDescription(getAsString(new OID("1.3.6.1.2.1.2.2.1.8." + ont))); // Адм состояние

@@ -15,8 +15,8 @@ public class TestCuFocus extends SnmpCommand implements TestInterface {
 
     @Override
     public ViewTest test() throws IOException {
-        String ifindex = String.valueOf(Nport(viewTest.getSlot(), viewTest.getPort(), "00"));
-        String chindex = String.valueOf(Nport(viewTest.getSlot(),viewTest.getPort(),  "01"));
+        String ifindex = String.valueOf(Nport(viewTest.getPort(), viewTest.getSlot(), "00"));
+        String chindex = String.valueOf(Nport(viewTest.getPort(), viewTest.getSlot(), "01"));
         setAddress("udp:" + viewTest.getIp_address() + "/161");
         viewTest.setStatus(getAsString(new OID(SMI + "1286.1.3.9.2.1.1.1.7." + ifindex))); //состояние линии
         viewTest.setProfil(getAsString(new OID(SMI + "1286.1.3.9.1.5.1.1.1.2." + ifindex))); //тек. профиль

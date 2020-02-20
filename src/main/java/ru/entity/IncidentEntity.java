@@ -180,4 +180,34 @@ public class IncidentEntity {
     public int hashCode() {
         return Objects.hash(typeincident, n_incident, idcity, service, declared, controlterm, controltermsla, controltermtask, createtime, clazz, repet, yield, decisiontime, nameclient, labelofservice, address, room, phone, techdata, comment, timeclose, workersEntity, divisionEntity, technogyEntity);
     }
+
+    @Override
+    public String toString() {
+        return "IncidentEntity{" +
+                "n_incident=" + n_incident +
+                ", typeincident=" + typeincident +
+                ", idcity=" + idcity +
+                ", service=" + service +
+                ", declared='" + declared + '\'' +
+                ", controlterm=" + controlterm +
+                ", controltermsla='" + controltermsla + '\'' +
+                ", controltermtask='" + controltermtask + '\'' +
+                ", createtime=" + createtime +
+                ", clazz='" + clazz + '\'' +
+                ", repet=" + repet +
+                ", yield=" + yield +
+                ", decisiontime=" + decisiontime +
+                ", nameclient='" + nameclient + '\'' +
+                ", labelofservice=" + labelofservice +
+                ", address='" + address + '\'' +
+                ", room='" + room + '\'' +
+                ", phone=" + phone +
+                ", techdata='" + techdata + '\'' +
+                ", comment='" + comment + '\'' +
+                ", timeclose=" + timeclose +
+                ", workersEntity=" + workersEntity +
+                ", divisionEntity=" + divisionEntity +
+                ", technogyEntity=" + technogyEntity +
+                '}';
+    }
 }

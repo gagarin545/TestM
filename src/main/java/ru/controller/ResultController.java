@@ -15,6 +15,7 @@ public class ResultController {
     ResultService resultService;
 
     @GetMapping("/{iddivision}")
-    public ModelAndView incidentList(@PathVariable Integer[] iddivision) { return new ModelAndView("ResultList", "parcels", resultService.resultList(iddivision));   }
+    public ModelAndView incidentList(@PathVariable Integer[] iddivision) {
+        return new ModelAndView("ResultList", "parcels", resultService.resultList(iddivision));   }
 
 }

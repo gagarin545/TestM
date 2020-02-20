@@ -11,7 +11,7 @@ public interface IncidentEntityRepository extends JpaRepository<IncidentEntity, 
     @Query("select b from IncidentEntity b where b.n_incident = :n_incident")
     IncidentEntity findByNumer(@Param("n_incident") long n_incident);
 
-    @Query(value="select * from incident b where timeclose + time'00:20' > (select max(timeclose) from incident) and iddivision in :iddivision", nativeQuery = true)
+    @Query(value="select * from incident b where timeclose + time'00:20' > (select max(timeclose) from incident) and iddivision in :iddivision Order By typeincident, decisiontime", nativeQuery = true)
     List<IncidentEntity> findByallontime(@Param("iddivision") int[] iddivision);
 
     @Query(value="select * from incident b where timeclose > current_date - 1 and iddivision in :iddivision and timeclose + time'00:20' > (select max(timeclose) from incident) and controlterm between current_timestamp and current_timestamp + time'04:00'", nativeQuery = true)

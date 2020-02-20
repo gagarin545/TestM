@@ -19,9 +19,10 @@ public class StoreTest extends SnmpCommand implements TestInterface {
     @Override
     public ViewTest test() throws IOException {
         ViewTest viewTest = new ViewTest();
+        viewTest.setService(incident.getService());
         String s = incident.getTechdata();
         //System.out.println(s);
-        System.out.println( incident.getService());
+        System.out.println("Тестирую ->" + incident.getService());
 
         if (s.contains("[") && !s.contains("[КСА")) {
             if ((s.substring(s.lastIndexOf("[") + 1, s.lastIndexOf("]")).length() < 15)) {
@@ -77,8 +78,8 @@ public class StoreTest extends SnmpCommand implements TestInterface {
 
                     break;
                 case 3: // PON
+                    try {
                         viewTest.setSlotPortOnt(Arrays.stream((new GetResultPage("http://10.183.116.238/cgi-bin/getTechData.php?svc=" + incident.getService()).getResultTest().readLine()).split(";"))
-                                .skip(4)
                                 .collect(Collectors.toList()));
                         switch (getAsString(new OID(".1.3.6.1.2.1.1.1.0"))) {
                             case "ECI telecom HiFOCuS broadband access system":
@@ -90,12 +91,19 @@ public class StoreTest extends SnmpCommand implements TestInterface {
                             default:
                                 System.out.println(getAsString(new OID(".1.3.6.1.2.1.1.1.0")));
                         }
+                    } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
+                        System.out.println("    Ex-> " + incident.getService() + "tech=" + incident.getTechnogyEntity().getMameTechnology());
+                    }
                     break;
                 case 5: // FTTx
+                   // System.out.println(incident.getTechnogyEntity().getMameTechnology() + "|" + incident.getTechdata());
                     viewTest.setPort(Arrays.stream(s.substring(s.lastIndexOf("]") + 1).replace("-", "").trim().split(" ")).findFirst().get());
+                    System.out.println("ip-" + viewTest.getIp_address() + " port=" + viewTest.getPort());
                     new TestEthernetSwitch(viewTest).test();
                     break;
             }
-        }   return viewTest;
+        }
+        System.out.print(viewTest.toString());
+        return viewTest;
     }
 }

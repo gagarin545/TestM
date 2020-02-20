@@ -16,7 +16,7 @@ public class TestEciOptic implements TestInterface {
     @Override
     public ViewTest test() throws IOException {
         String url = "http://10.183.116.238/cgi-bin/getline.cgi?uslogin=";
-        System.out.println( service);
+       // System.out.println( service);
 
         (new GetResultPage(url + service).getResultTest().lines())
                 .forEach(x-> {

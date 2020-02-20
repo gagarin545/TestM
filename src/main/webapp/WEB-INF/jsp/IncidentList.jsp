@@ -3,16 +3,15 @@
 <html>
   <head><title>Список активных нарядов</title></head>
   <body>
-  <h1>Список активных нарядов</h1>
+  <h2>Список активных нарядов</h2>
   <ul>
     <c:forEach items="${parcels}" var="parcel">
-
-      <li><a href="/incident/${parcel.n_incident}"> <b>${parcel.address}</b>, - <b>${parcel.room}</b> - <b>${parcel.declared}</b> Время- <b>${parcel.controlterm}</b> Sla- <b>${parsel.controltermsla}</b> - Task- <b>${parsel.controltermslatask}</b></a>
-        <script language="JavaScript">
-          var dates;
-          dates = ${parcel.controlterm};
-          document.write( "dat->" +dates);
-        </script>
+      <li>
+        <a href="/incident/full/${parcel.n_incident}"> <b>${parcel.n_incident}</b> </a>
+        Время визита до - <b>${parcel.decisiontime}</b>
+        <a href="/test/${parcel.n_incident}"> (<b>${parcel.service}</b>) </a> <b>${parcel.address}</b>, - <b>${parcel.room}</b>
+        <br><b>${parcel.declared}</b> контрольное время - <b>${parcel.controlterm}</b>  Назначен - <b>${parcel.workersEntity.name}</b><br>
+      </li>
     </c:forEach>
   </ul>
   </body>

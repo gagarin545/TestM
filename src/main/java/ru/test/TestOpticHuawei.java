@@ -24,7 +24,7 @@ public class TestOpticHuawei extends SnmpCommand implements TestInterface {
         viewTest.setSn(getAsString(new OID(SMI + "2011.6.128.1.1.2.43.1.3." + ifindex + '.' + ont)));           //  sn
         viewTest.setPasswd(getAsString(new OID(SMI + "2011.6.128.1.1.2.43.1.4." + ifindex + '.' + ont)));    //  pass
         viewTest.setOntVersion(getAsString(new OID(SMI + "2011.6.128.1.1.2.45.1.5." + ifindex + '.' + ont)));    //  версия ont
-        viewTest.setPower_out(Float.parseFloat(getAsString(new OID(SMI + "2011.6.128.1.1.2.51.1.4." + ifindex + '.' + ont)))/100);    //  RxPower
+        viewTest.setPower_in(Float.parseFloat(getAsString(new OID(SMI + "2011.6.128.1.1.2.51.1.4." + ifindex + '.' + ont)))/100);    //  RxPower
         viewTest.setDistance(getAsString(new OID(SMI + "2011.6.128.1.1.2.46.1.20." + ifindex + '.' + ont)));    //  Distance
         viewTest.setStatus_port1(getAsString(new OID(SMI + "2011.6.128.1.1.2.62.1.22." + ifindex + '.' + ont + ".1")));  //состояние порта 1
         viewTest.setV_port1(getAsString(new OID(SMI + "2011.6.128.1.1.2.62.1.4." + ifindex + '.' + ont + ".1")));  // скорость порта 1
